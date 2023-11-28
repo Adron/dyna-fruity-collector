@@ -1,4 +1,8 @@
 type Query {
     hello: String
-#    listCollections: [String]
+    collections: [String]
+    docsByCollectionName(collectionName: String!): [String]
+    docsBySearchString(collectionName: String!, fieldToSearch: String!, searchString: String!): [String]
+    docsByRegex(collectionName: String!, fieldToSearch: String!, regex: String!): [String]
+    docsFindByField(collectionName: String!, fieldToFind: String!): [String]
 }
