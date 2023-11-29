@@ -94,7 +94,19 @@ public class QueryResolver {
     }
 
     @QueryMapping
+    public List<String> docsFindByField(@Argument String collectionName, @Argument String fieldToFind) {
+        List<String> documents = new ArrayList<>();
 
+        MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
 
-//    docsFindByField(collectionName: String!, fieldToFind: String!): [String]
+        Document query = new Document(fieldToFind, new Document("$exists", true));
+
+        FindIterable<Document> result = collection.find(query);
+
+        for (Document doc : result ) {
+            documents.add(doc.toString());
+        }
+
+        return documents;
+    }
 }
